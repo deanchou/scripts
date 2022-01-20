@@ -4,16 +4,40 @@
 // @namespace       zmn
 // @match           https://play.farmersworld.io/
 // @grant           none
-// @version         2022.1.0.2
+// @version         2022.1.0.3
 // @author          Dean.Chou
 // @run-at          document-end
-// @updateURL       https://raw.githubusercontent.com/deanchou/scripts/master/Violentmonkey/farmersworld.js
 // @downloadURL     https://raw.githubusercontent.com/deanchou/scripts/master/Violentmonkey/farmersworld.js
 // ==/UserScript==
+
+// 维修开始后延迟（1秒）
+const delayAfterRepair = [1 * 1000, 3 * 1000];
+
+// 随机
+const random = (min, max) =>
+    Math.floor(Math.random() * (max - min + 1) + min);
+
 (async function () {
     'use strict';
 
     console.log('脚本开始');
+
+    setInterval(() => {
+        const buttonClosePopup = document.querySelector(
+            ".modal .plain-button.short"
+        );
+
+        if (buttonClosePopup) buttonClosePopup.click();
+    }, random(1, 2) * 1000);
+
+    setInterval(() => {
+        const buttonCloseCPUPopup = document.querySelector(
+            ".modal-stake .modal-stake-close img"
+        );
+
+        if (buttonCloseCPUPopup) buttonCloseCPUPopup.click();
+    }, random(1, 2) * 1000);
+
     start(1000);
 
 })();
@@ -56,6 +80,22 @@ async function autoRobot() {
                     }
                 }
             }
+        }
+    }
+
+    const buttonRepair = document.querySelectorAll(
+        ".info-section .plain-button"
+    )[1];
+    if (buttonRepair) {
+        const quality = eval(
+            document.querySelector(".card-number").innerText
+        );
+        if (
+            ![...buttonRepair.classList].includes("disabled") &&
+            quality < 0.5
+        ) {
+            buttonRepair.click();
+            await sleep(random(...delayAfterRepair));
         }
     }
 
