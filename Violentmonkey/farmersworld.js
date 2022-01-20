@@ -1,13 +1,13 @@
 // ==UserScript==
-// @name        农民世界自动化
-// @description 体力判断、自动工作
-// @namespace   zmn
-// @match       https://play.farmersworld.io/
-// @grant       none
-// @version     2022.1.0.1
-// @author      Dean.Chou
-// @run-at      document-end
-// @updateURL   https://raw.githubusercontent.com/deanchou/scripts/master/Violentmonkey/farmersworld.js
+// @name            农民世界自动化
+// @description     体力判断、自动工作
+// @namespace       zmn
+// @match           https://play.farmersworld.io/
+// @grant           none
+// @version         2022.1.0.1
+// @author          Dean.Chou
+// @run-at          document-end
+// @@downloadURL    https://raw.githubusercontent.com/deanchou/scripts/master/Violentmonkey/farmersworld.js
 // ==/UserScript==
 (async function () {
     'use strict';
