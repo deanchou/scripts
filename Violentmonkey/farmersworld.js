@@ -58,6 +58,7 @@ async function autoRobot() {
         .textContent.split("/")
         .map(Number);
 
+    console.log(currentEnergy, maxEnergy, currentFish);
     if (maxEnergy - currentEnergy > 100 && currentFish > 1) {
         const countEnergyClicks = Math.min(
             currentFish,
