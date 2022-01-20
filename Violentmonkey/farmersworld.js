@@ -4,7 +4,7 @@
 // @namespace       zmn
 // @match           https://play.farmersworld.io/
 // @grant           none
-// @version         2022.1.0.4
+// @version         2022.1.0.5
 // @author          Dean.Chou
 // @run-at          document-end
 // @downloadURL     https://raw.githubusercontent.com/deanchou/scripts/master/Violentmonkey/farmersworld.js
@@ -58,7 +58,7 @@ async function autoRobot() {
         .textContent.split("/")
         .map(Number);
 
-    console.log(currentEnergy, maxEnergy, currentFish);
+    console.log("体力", currentEnergy, maxEnergy, currentFish);
     if (maxEnergy - currentEnergy > 100 && currentFish > 1) {
         const countEnergyClicks = Math.min(
             currentFish,
@@ -76,23 +76,6 @@ async function autoRobot() {
                 await sleep(200);
             }
             document.querySelector(".modal-wrapper .plain-button").click();
-            await sleep(15000);
-        }
-    }
-
-    // 修理
-    const buttonRepair = document.querySelectorAll(
-        ".info-section .plain-button"
-    )[1];
-    if (buttonRepair) {
-        const quality = eval(
-            document.querySelector(".card-number").innerText
-        );
-        if (
-            ![...buttonRepair.classList].includes("disabled") &&
-            quality < 0.5
-        ) {
-            buttonRepair.click();
             await sleep(5000);
         }
     }
@@ -101,6 +84,27 @@ async function autoRobot() {
     let imgTools = document.getElementsByClassName('carousel__img--item');
     for (let i = 0; i < imgTools.length; i++) {
         imgTools[i].click();
+        await sleep(500);
+
+        // 修理
+        const buttonRepair = document.querySelectorAll(
+            ".info-section .plain-button"
+        )[1];
+        if (buttonRepair) {
+            const quality = eval(
+                document.querySelector(".card-number").innerText
+            );
+            console.log('耐久', quality);
+            if (
+                ![...buttonRepair.classList].includes("disabled") &&
+                quality < 0.5
+            ) {
+                buttonRepair.click();
+                console.log('修理');
+                await sleep(5000);
+            }
+        }
+
         let times = document.getElementsByClassName('card-container--time');
         if (times.length > 0) console.log(times[0].innerHTML);
         let btnWorks = document.getElementsByClassName('plain-button semi-short');
