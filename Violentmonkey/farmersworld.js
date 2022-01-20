@@ -10,13 +10,6 @@
 // @downloadURL     https://raw.githubusercontent.com/deanchou/scripts/master/Violentmonkey/farmersworld.js
 // ==/UserScript==
 
-// 维修开始后延迟（1秒）
-const delayAfterRepair = [1 * 1000, 3 * 1000];
-
-// 随机
-const random = (min, max) =>
-    Math.floor(Math.random() * (max - min + 1) + min);
-
 (async function () {
     'use strict';
 
@@ -28,7 +21,7 @@ const random = (min, max) =>
         );
 
         if (buttonClosePopup) buttonClosePopup.click();
-    }, random(1, 2) * 1000);
+    }, 2000);
 
     setInterval(() => {
         const buttonCloseCPUPopup = document.querySelector(
@@ -36,7 +29,7 @@ const random = (min, max) =>
         );
 
         if (buttonCloseCPUPopup) buttonCloseCPUPopup.click();
-    }, random(1, 2) * 1000);
+    }, 2000);
 
     start(1000);
 
@@ -57,32 +50,36 @@ async function autoRobot() {
     }
 
     // 检查体力
-    let resNumber = document.getElementsByClassName('resource-number');
-    if (resNumber.length == 4) {
-        let num = parseInt(resNumber[3].firstChild.innerHTML);
-        console.log('体力', num);
-        if (num < 400) {
-            let resEnergy = document.getElementsByClassName('resource-energy--plus');
-            if (resEnergy.length > 0) {
-                resEnergy[0].click();
-                console.log('添加体力');
-                let imgButton = document.getElementsByClassName('image-button');
-                if (imgButton.length > 0) {
-                    for (let i = 0; i < (500 - num) / 5; i++) {
-                        imgButton[2].click();
-                        await sleep(100);
-                    }
-                    let plainButton = document.getElementsByClassName('plain-button long');
-                    if (plainButton.length > 0) {
-                        plainButton[0].click();
-                        console.log('点击充体力');
-                        await sleep(5000);
-                    }
-                }
+    const currentFish = Math.floor(
+        +document.querySelectorAll(".resource-number")[2].innerText
+    );
+    const [currentEnergy, maxEnergy] = document
+        .querySelectorAll(".resource-number")[3]
+        .textContent.split("/")
+        .map(Number);
+
+    if (maxEnergy - currentEnergy > 100 && currentFish > 1) {
+        const countEnergyClicks = Math.min(
+            currentFish,
+            Math.floor((maxEnergy - currentEnergy) / 5)
+        );
+
+        if (countEnergyClicks > 0) {
+            document.querySelector(".resource-energy img").click();
+            await sleep(2000);
+
+            for (let i = 0; i++ < countEnergyClicks;) {
+                document
+                    .querySelector(".image-button[alt='Plus Icon']")
+                    .click();
+                await sleep(200);
             }
+            document.querySelector(".modal-wrapper .plain-button").click();
+            await sleep(15000);
         }
     }
 
+    // 修理
     const buttonRepair = document.querySelectorAll(
         ".info-section .plain-button"
     )[1];
@@ -95,7 +92,7 @@ async function autoRobot() {
             quality < 0.5
         ) {
             buttonRepair.click();
-            await sleep(random(...delayAfterRepair));
+            await sleep(5000);
         }
     }
 
