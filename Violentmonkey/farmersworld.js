@@ -7,7 +7,7 @@
 // @version         2022.1.0.2
 // @author          Dean.Chou
 // @run-at          document-end
-// @@downloadURL    https://raw.githubusercontent.com/deanchou/scripts/master/Violentmonkey/farmersworld.js
+// @downloadURL    https://raw.githubusercontent.com/deanchou/scripts/master/Violentmonkey/farmersworld.js
 // ==/UserScript==
 (async function () {
     'use strict';
