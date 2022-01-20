@@ -36,7 +36,7 @@ async function autoRobot() {
     if (resNumber.length == 4) {
         let num = parseInt(resNumber[3].firstChild.innerHTML);
         console.log('体力', num);
-        if (num < 200) {
+        if (num < 400) {
             let resEnergy = document.getElementsByClassName('resource-energy--plus');
             if (resEnergy.length > 0) {
                 resEnergy[0].click();
