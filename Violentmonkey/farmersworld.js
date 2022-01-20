@@ -4,7 +4,7 @@
 // @namespace       zmn
 // @match           https://play.farmersworld.io/
 // @grant           none
-// @version         2022.1.0.1
+// @version         2022.1.0.2
 // @author          Dean.Chou
 // @run-at          document-end
 // @updateURL       https://raw.githubusercontent.com/deanchou/scripts/master/Violentmonkey/farmersworld.js
