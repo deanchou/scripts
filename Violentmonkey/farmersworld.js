@@ -4,10 +4,11 @@
 // @namespace       zmn
 // @match           https://play.farmersworld.io/
 // @grant           none
-// @version         2022.1.0.2
+// @version         2022.1.0.1
 // @author          Dean.Chou
 // @run-at          document-end
-// @downloadURL    https://raw.githubusercontent.com/deanchou/scripts/master/Violentmonkey/farmersworld.js
+// @updateURL       https://raw.githubusercontent.com/deanchou/scripts/master/Violentmonkey/farmersworld.js
+// @downloadURL     https://raw.githubusercontent.com/deanchou/scripts/master/Violentmonkey/farmersworld.js
 // ==/UserScript==
 (async function () {
     'use strict';
