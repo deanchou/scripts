@@ -109,7 +109,7 @@ async function autoRobot() {
         if (times.length > 0) console.log(times[0].innerHTML);
         let btnWorks = document.getElementsByClassName('plain-button semi-short');
         for (let j = 0; j < btnWorks.length; j++) {
-            if (btnWorks[j].innerHTML == 'Mine') {
+            if (btnWorks[j].innerHTML == 'Mine' || btnWorks[j].innerHTML == 'Claim') {
                 btnWorks[j].click();
                 console.log('开始生产');
                 await sleep(5000);
