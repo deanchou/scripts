@@ -4,7 +4,7 @@
 // @namespace       zmn
 // @match           https://play.farmersworld.io/
 // @grant           none
-// @version         2022.1.0.7
+// @version         2022.1.0.8
 // @author          Dean.Chou
 // @run-at          document-end
 // @downloadURL     https://raw.githubusercontent.com/deanchou/scripts/master/Violentmonkey/farmersworld.js
@@ -14,6 +14,10 @@
     'use strict';
 
     console.log('脚本开始');
+
+    setInterval(() => {
+        location.reload();
+    }, 3600000);
 
     setInterval(() => {
         const buttonClosePopup = document.querySelector(
