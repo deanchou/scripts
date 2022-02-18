@@ -9,6 +9,8 @@
 // @run-at          document-end
 // @downloadURL     https://raw.githubusercontent.com/deanchou/scripts/master/Violentmonkey/farmersworld.js
 // ==/UserScript==
+const sH = 6;   // 电锯不生产开始时间
+const eH = 18;  // 电锯不生产结束时间
 
 (async function () {
     'use strict';
@@ -112,7 +114,15 @@ async function autoRobot() {
             let times = document.getElementsByClassName('card-container--time');
             if (times.length > 0) console.log(times[0].innerHTML);
             let btnWorks = document.getElementsByClassName('plain-button semi-short');
+            let titles = document.getElementsByClassName('info-title-name');
             for (let j = 0; j < btnWorks.length; j++) {
+                // 是否电锯
+                if (titles[0].innerHTML == 'Chainsaw' && sH > 0 && eH > 0) {
+                    let t = new Date();
+                    // 是否满足电锯生产时间
+                    if (t.getHours() >= sH && t.getHours() <= eH)
+                        continue;
+                }
                 if (btnWorks[j].innerHTML == 'Mine' || btnWorks[j].innerHTML == 'Claim') {
                     btnWorks[j].click();
                     console.log('开始生产');
