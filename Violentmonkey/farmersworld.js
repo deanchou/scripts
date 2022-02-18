@@ -118,9 +118,9 @@ async function autoRobot() {
             for (let j = 0; j < btnWorks.length; j++) {
                 // 是否电锯
                 if (titles[0].innerHTML == 'Chainsaw' && sH > 0 && eH > 0) {
-                    let t = new Date();
+                    let h = new Date().getHours();
                     // 是否满足电锯生产时间
-                    if (t.getHours() >= sH && t.getHours() <= eH)
+                    if (h >= sH && h <= eH)
                         continue;
                 }
                 if (btnWorks[j].innerHTML == 'Mine' || btnWorks[j].innerHTML == 'Claim') {
